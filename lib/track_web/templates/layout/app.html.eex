@@ -14,11 +14,15 @@
   </head>
 
   <body>
-    <div class="container">
-      <p class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %></p>
-      <p class="alert alert-danger" role="alert"><%= get_flash(@conn, :error) %></p>
-
-      <main role="main">
+    <div class="">
+      <header class="bb b--black-10 ">
+        <div class="mw9 center pv2 ph3 ph5-ns">
+          <h1 class="ma0 f3 i">Track</h1>
+        </div>
+      </header>
+      <main role="main" class="mw9 center pa3 pa5-ns pt3-ns">
+        <p class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %></p>
+        <p class="alert alert-danger" role="alert"><%= get_flash(@conn, :error) %></p>
         <%= render @view_module, @view_template, assigns %>
       </main>
 
