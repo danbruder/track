@@ -20,6 +20,7 @@ defmodule TrackWeb do
   def controller do
     quote do
       use Phoenix.Controller, namespace: TrackWeb
+      use Turbolinks
       import Plug.Conn
       import TrackWeb.Router.Helpers
       import TrackWeb.Gettext
@@ -32,7 +33,8 @@ defmodule TrackWeb do
                         namespace: TrackWeb
 
       # Import convenience functions from controllers
-      import Phoenix.Controller, only: [get_flash: 2, view_module: 1]
+      import Phoenix.Controller, only: [get_flash: 2, view_module: 1, get_csrf_token: 0]
+
 
       # Use all HTML functionality (forms, tags, etc)
       use Phoenix.HTML

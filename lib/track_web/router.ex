@@ -7,6 +7,7 @@ defmodule TrackWeb.Router do
     plug :fetch_flash
     plug :protect_from_forgery
     plug :put_secure_browser_headers
+    plug Turbolinks
   end
 
   pipeline :api do
@@ -17,6 +18,7 @@ defmodule TrackWeb.Router do
     pipe_through :browser # Use the default browser stack
 
     get "/", PageController, :index
+    get "/hello/:name", PageController, :hello
   end
 
   # Other scopes may use custom stacks.
