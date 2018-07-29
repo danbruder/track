@@ -13,4 +13,16 @@ defmodule Track.Accounts do
     |> User.changeset(args)
     |> Repo.insert
   end
+
+  def login_by_email(email, password) do
+    User 
+    |> Repo.get_by(email: email)
+    |> Comeonin.Argon2.check_pass(password)
+    |> case do
+      {:ok, user} ->
+        {:ok, user}
+      {:error, reason} ->
+        {:error, reason}
+    end
+  end
 end
