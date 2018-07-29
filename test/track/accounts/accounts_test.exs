@@ -8,28 +8,19 @@ defmodule Track.AccountsTest do
 
     @valid_attrs %{
       avatar_url: "some avatar_url",
-      email: "some email",
+      email: "some@email.com",
       first_name: "some first_name",
       last_name: "some last_name",
       password: "some password"
     }
     @update_attrs %{
       avatar_url: "some updated avatar_url",
-      email: "some updated email",
+      email: "updated@email.com",
       first_name: "some updated first_name",
       last_name: "some updated last_name",
       password: "some updated password"
     }
     @invalid_attrs %{avatar_url: nil, email: nil, first_name: nil, last_name: nil, password: nil}
-
-    def user_fixture(attrs \\ %{}) do
-      {:ok, user} =
-        attrs
-        |> Enum.into(@valid_attrs)
-        |> Accounts.create_user()
-
-      user
-    end
 
     test "Accounts.register/1 allows registration of new account" do
       assert {:ok, %User{} = user} = Accounts.register(@valid_attrs)
