@@ -23,7 +23,7 @@ defmodule Track.AccountsTest do
     @invalid_attrs %{avatar_url: nil, email: nil, first_name: nil, last_name: nil, password: nil}
 
     test "Accounts.register/1 allows registration of new account" do
-      assert {:ok, %User{} = user} = Accounts.register(@valid_attrs)
+      {:ok, user} = Track.Accounts.register(@valid_attrs)
     end
   end
 end
