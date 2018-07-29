@@ -6,11 +6,12 @@ defmodule Track.Repo.Migrations.CreateUsers do
       add :first_name, :string
       add :last_name, :string
       add :email, :string
-      add :password, :string
+      add :password_hash, :string
       add :avatar_url, :string
 
       timestamps()
     end
 
+    create unique_index("users", [:email])
   end
 end
