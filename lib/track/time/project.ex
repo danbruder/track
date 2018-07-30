@@ -8,6 +8,8 @@ defmodule Track.Time.Project do
     field :name, :string
     field :billable, :boolean
     belongs_to(:client, Track.Time.Client)
+    belongs_to(:user, Track.Accounts.User)
+    has_many(:logs, Track.Time.Log)
 
     timestamps()
   end
@@ -15,7 +17,7 @@ defmodule Track.Time.Project do
   @doc false
   def changeset(project, attrs) do
     project
-    |> cast(attrs, [:name, :bill_rate, :billable, :client_id])
-    |> validate_required([:name, :bill_rate, :billable])
+    |> cast(attrs, [:name, :bill_rate, :billable, :client_id, :user_id])
+    |> validate_required([:name, :bill_rate, :billable, :user_id])
   end
 end
