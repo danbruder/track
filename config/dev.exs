@@ -37,7 +37,7 @@ config :track, TrackWeb.Endpoint,
       ~r{priv/static/.*(js|css|png|jpeg|jpg|gif|svg)$},
       ~r{priv/gettext/.*(po)$},
       ~r{lib/track_web/views/.*(ex)$},
-      ~r{lib/track_web/templates/.*(eex)$}
+      ~r{lib/track_web/templates/.*(eex|slim|slime)$}
     ]
   ]
 
@@ -56,3 +56,5 @@ config :track, Track.Repo,
   database: "track_dev",
   hostname: "localhost",
   pool_size: 10
+
+config :phoenix_slime, :use_slim_extension, true

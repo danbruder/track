@@ -46,7 +46,8 @@ defmodule Track.Mixfile do
       {:turbolinks, "~> 0.3.4"},
       {:comeonin, "~> 4.0"},
       {:argon2_elixir, "~> 1.2"},
-      {:excoveralls, "~> 0.8", only: :test}
+      {:excoveralls, "~> 0.8", only: :test},
+      {:phoenix_slime, "~> 0.10.0"}
     ]
   end
 

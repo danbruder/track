@@ -1,0 +1,9 @@
+h1 Timesheet
+
+= render("_form.html", assigns)
+
+div
+  ul
+    = for log <- @logs do
+      li  = log.title
+    

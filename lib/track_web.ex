@@ -29,12 +29,12 @@ defmodule TrackWeb do
 
   def view do
     quote do
-      use Phoenix.View, root: "lib/track_web/templates",
-                        namespace: TrackWeb
+      use Phoenix.View,
+        root: "lib/track_web/templates",
+        namespace: TrackWeb
 
       # Import convenience functions from controllers
       import Phoenix.Controller, only: [get_flash: 2, view_module: 1, get_csrf_token: 0]
-
 
       # Use all HTML functionality (forms, tags, etc)
       use Phoenix.HTML
@@ -42,6 +42,8 @@ defmodule TrackWeb do
       import TrackWeb.Router.Helpers
       import TrackWeb.ErrorHelpers
       import TrackWeb.Gettext
+
+      import TrackWeb.SessionHelpers
     end
   end
 

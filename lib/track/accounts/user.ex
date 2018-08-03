@@ -17,7 +17,7 @@ defmodule Track.Accounts.User do
   def changeset(user, attrs) do
     user
     |> cast(attrs, [:first_name, :last_name, :email, :password, :avatar_url])
-    |> validate_required([:first_name, :last_name, :email, :password, :avatar_url])
+    |> validate_required([:first_name, :last_name, :email, :password])
     |> validate_format(:email, ~r/@/)
     |> unique_constraint(:email)
     |> put_pass_hash

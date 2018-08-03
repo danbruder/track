@@ -213,6 +213,14 @@ defmodule Track.Time do
     Repo.all(Log)
   end
 
+  def list_logs_for_user_and_date(user, date) do
+    from(
+      l in Log,
+      where: l.user_id == ^user.id
+    )
+    |> Repo.all()
+  end
+
   @doc """
   Gets a single log.
 
@@ -290,8 +298,7 @@ defmodule Track.Time do
       %Ecto.Changeset{source: %Log{}}
 
   """
-  def change_log(%Log{} = log) do
+  def change_log(%Log{} = log \\ %Log{}) do
     Log.changeset(log, %{})
   end
-
 end
