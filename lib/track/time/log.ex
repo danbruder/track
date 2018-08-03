@@ -32,7 +32,6 @@ defmodule Track.Time.Log do
     |> cast(attrs, [
       :description,
       :hours,
-      :date,
       :billable,
       :bill_rate,
       :internal_rate,
@@ -41,6 +40,7 @@ defmodule Track.Time.Log do
       :client_id,
       :user_id
     ])
+    |> cast_date(attrs)
     |> validate_required([
       :description,
       :hours,
@@ -111,4 +111,15 @@ defmodule Track.Time.Log do
   end
 
   defp put_calculated_fields(changeset), do: changeset
+
+  defp cast_date(changeset, args) do
+    with %{"date" => date} <- args,
+         {:ok, date} <- Date.from_iso8601(date) do
+      changeset
+      |> put_change(:date, date)
+    else
+      _ ->
+        changeset
+    end
+  end
 end

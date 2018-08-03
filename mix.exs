@@ -12,7 +12,12 @@ defmodule Track.Mixfile do
       aliases: aliases(),
       deps: deps(),
       test_coverage: [tool: ExCoveralls],
-      preferred_cli_env: ["coveralls": :test, "coveralls.detail": :test, "coveralls.post": :test, "coveralls.html": :test]
+      preferred_cli_env: [
+        coveralls: :test,
+        "coveralls.detail": :test,
+        "coveralls.post": :test,
+        "coveralls.html": :test
+      ]
     ]
   end
 
@@ -22,7 +27,7 @@ defmodule Track.Mixfile do
   def application do
     [
       mod: {Track.Application, []},
-      extra_applications: [:logger, :runtime_tools]
+      extra_applications: [:logger, :runtime_tools, :timex, :timex_ecto]
     ]
   end
 
@@ -47,7 +52,9 @@ defmodule Track.Mixfile do
       {:comeonin, "~> 4.0"},
       {:argon2_elixir, "~> 1.2"},
       {:excoveralls, "~> 0.8", only: :test},
-      {:phoenix_slime, "~> 0.10.0"}
+      {:phoenix_slime, "~> 0.10.0"},
+      {:timex, "~> 3.0"},
+      {:timex_ecto, "~> 3.0"}
     ]
   end
 
