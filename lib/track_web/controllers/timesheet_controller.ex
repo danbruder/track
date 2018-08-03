@@ -11,8 +11,8 @@ defmodule TrackWeb.TimesheetController do
     render(conn, "index.html", logs: logs, changeset: changeset)
   end
 
-  def create(conn, params) do
-    case Time.create_log(params) do
+  def create(conn, %{"log" => log} = params) do
+    case Time.create_log(log) do
       {:ok, log} ->
         logs = list_logs(conn, params)
         changeset = Time.change_log()
@@ -23,6 +23,7 @@ defmodule TrackWeb.TimesheetController do
 
       {:error, changeset} ->
         logs = list_logs(conn, params)
+        IO.inspect(changeset)
 
         conn
         |> put_flash(:error, "Validation error")

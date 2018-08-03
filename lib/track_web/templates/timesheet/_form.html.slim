@@ -3,30 +3,30 @@
     label  
       span Description
       = text_input f, :description, class: "db"
-      = error_tag f, :description
+    = error_tag f, :description
   .pv2
     label  
       span Hours
       = text_input f, :hours, class: "db"
-      = error_tag f, :hours
+    = error_tag f, :hours
   .pv2
     label  
       span Date
       = text_input f, :date, class: "db"
-      = error_tag f, :date
+    = error_tag f, :date
   .pv2
     label  
       span Bill Rate
       = text_input f, :bill_rate, class: "db"
-      = error_tag f, :bill_rate
+    = error_tag f, :bill_rate
   .pv2
     label  
       span Internal Rate
       = text_input f, :internal_rate, class: "db"
-      = error_tag f, :internal_rate
+    = error_tag f, :internal_rate
   .pv2
     label  
       = checkbox f, :billable, class: "mr2"
       span Billable
-      = error_tag f, :billable
+    = error_tag f, :billable
   input type="submit" value="Save"
