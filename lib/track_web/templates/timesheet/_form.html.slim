@@ -29,4 +29,9 @@
       = checkbox f, :billable, class: "mr2"
       span Billable
     = error_tag f, :billable
+  .pv2
+    label  
+      = select f, :user_id, @all_users, class: "mr2"
+      span User
+    = error_tag f, :user_id
   input type="submit" value="Save"
