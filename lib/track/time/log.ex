@@ -118,6 +118,9 @@ defmodule Track.Time.Log do
       changeset
       |> put_change(:date, date)
     else
+      {:error, :invalid_format} ->
+        add_error(changeset, :date, "Invalid date format")
+
       _ ->
         changeset
     end

@@ -62,5 +62,9 @@ exports.config = {
       $: 'jquery',
       jQuery: 'jquery',
     },
+    styles: {
+      selectize: ['dist/css/selectize.css'], //, 'dist/css/selectize.default.css'],
+      'pretty-checkbox': ['dist/pretty-checkbox.min.css'],
+    },
   },
 };

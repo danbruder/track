@@ -1,15 +1,4 @@
 /* This file is for your main application css. */
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  font-family: 'Playfair Display', serif;
-}
-.display {
-  font-family: 'Playfair Display', serif;
-}
 body {
   font-family: 'IBM Plex Sans', sans-serif;
 }

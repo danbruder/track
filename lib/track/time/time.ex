@@ -210,7 +210,9 @@ defmodule Track.Time do
 
   """
   def list_logs do
-    Repo.all(Log)
+    Log
+    |> preload(:project)
+    |> Repo.all()
   end
 
   def list_logs_for_user_and_date(user, date) do

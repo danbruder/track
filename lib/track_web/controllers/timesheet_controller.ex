@@ -23,7 +23,6 @@ defmodule TrackWeb.TimesheetController do
 
       {:error, changeset} ->
         logs = list_logs(conn, params)
-        IO.inspect(changeset)
 
         conn
         |> put_flash(:error, "Validation error")

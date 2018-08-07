@@ -8,6 +8,8 @@ defmodule Track.Accounts do
 
   alias Track.Accounts.User
 
+  def list_users, do: User |> Repo.all()
+
   def register(args) do
     %User{}
     |> User.changeset(args)
