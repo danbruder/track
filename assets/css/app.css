@@ -2,3 +2,15 @@
 body {
   font-family: 'IBM Plex Sans', sans-serif;
 }
+
+.selectize-input {
+  box-shadow: none;
+}
+
+.purple {
+  color: rgb(149, 134, 165);
+}
+
+.bg-purple {
+  background: linear-gradient(rgb(74, 62, 86), rgb(48, 40, 57));
+}

@@ -1,0 +1,20 @@
+- text_field_classes = "input-reset ba br1 b--black-20 pv2 pl2 mb2 db w-100"
+.ba.b--black-10.items-center.br1
+  = form_for @changeset, project_path(@conn, :create), fn f -> 
+    .pa3
+      .flex.items-center
+        .mw7.w-100.pr1
+          .flex.items-center
+            i.mw1.gray.pr1 data-feather="layers"
+            small.db.gray.ttu Name
+          = text_input f, :name, class: text_field_classes <> " pl0", placeholder: "Rocketship..."
+          = error_tag f, :name
+        .mw5.w-100
+          .flex.items-center
+            i.mw1.gray.pr1 data-feather="briefcase"
+            small.db.gray.ttu Client 
+          = select f, :client_id, all_clients(), class: "mr2 mw7 w-100"
+          = error_tag f, :client_id
+    div.bt.b--black-10
+      .pa3
+        input.ba.bg-white.pa3.pv2.br1.grow.pointer type="submit" value="Save"

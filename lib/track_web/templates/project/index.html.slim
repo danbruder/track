@@ -1,0 +1,9 @@
+h1 Projects
+
+a href="#{project_path(@conn, :new)}" New Project
+
+ul
+  = for project <- @projects do
+    li = project.name
+
+

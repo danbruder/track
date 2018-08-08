@@ -1,8 +1,5 @@
 h1 Timesheet
 
-.pb5
-  = render("_form.html", assigns)
-
 div.w-100
   = for log <- user_logs_by_date() do
     .mb3.w-100.pa3.pv3.br1.ba.b--black-10.flex.items-center.justify-between style="border-bottom: 1px solid rgb(226, 219, 232);"

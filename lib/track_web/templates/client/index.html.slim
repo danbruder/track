@@ -1,0 +1,7 @@
+h1 Clients
+
+a href="#{client_path(@conn, :new)}" New Client
+
+ul
+  = for client <- @clients do
+    li = client.name

@@ -98,7 +98,7 @@ defmodule Track.Time do
       %Ecto.Changeset{source: %Client{}}
 
   """
-  def change_client(%Client{} = client) do
+  def change_client(%Client{} = client \\ %Client{}) do
     Client.changeset(client, %{})
   end
 
@@ -194,7 +194,7 @@ defmodule Track.Time do
       %Ecto.Changeset{source: %Project{}}
 
   """
-  def change_project(%Project{} = project) do
+  def change_project(%Project{} = project \\ %Project{}) do
     Project.changeset(project, %{})
   end
 

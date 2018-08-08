@@ -27,7 +27,15 @@ defmodule TrackWeb.Router do
     post("/user/register", RegistrationController, :create)
 
     get("/timesheet", TimesheetController, :index)
-    post("/timesheet", TimesheetController, :create)
+
+    get("/entry/new", LogController, :new)
+    post("/entry/new", LogController, :create)
+    get("/projects", ProjectController, :index)
+    get("/projects/new", ProjectController, :new)
+    post("/projects/new", ProjectController, :create)
+    get("/clients", ClientController, :index)
+    get("/clients/new", ClientController, :new)
+    post("/clients/new", ClientController, :create)
   end
 
   # Other scopes may use custom stacks.

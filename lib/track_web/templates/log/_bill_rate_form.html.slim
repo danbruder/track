@@ -1,0 +1,19 @@
+.mw5.w-100.pv3
+  small.i.timesheet-toggle-edit-bill-rates.underline.pointer.gray Override bill rates
+    .dn.timesheet-edit-bill-rates
+      .pv2.mw4.w-100.pr1
+        small.pb1.db.gray.ttu Bill Rate
+          = text_input f, :bill_rate, class: text_field_classes, placeholder: "0.00"
+          = error_tag f, :bill_rate
+        .pv2.mw4.w-100.pr1
+          small.pb1.db.gray.ttu Internal Rate
+          = text_input f, :internal_rate, class: text_field_classes, placeholder: "0.00"
+          = error_tag f, :internal_rate
+        .pv2
+          small.pb1.db.gray.ttu Billable
+          .pretty.p-smooth.p-icon.p-round
+            = checkbox f, :billable
+            .state.p-success
+              i.icon data-feather="check-circle"
+              label.gray.f5 Yes, project is billable
+          = error_tag f, :billable
