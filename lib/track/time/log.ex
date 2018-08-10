@@ -58,17 +58,12 @@ defmodule Track.Time.Log do
   defp put_calculated_fields(
          %Ecto.Changeset{
            valid?: true,
-           changes: %{
-             billable: true,
-             bill_rate: bill_rate,
-             hours: hours,
-             internal_rate: internal_rate
-           }
+           changes: changes
          } = changeset
        ) do
-    bill_rate = Decimal.new(bill_rate)
-    internal_rate = Decimal.new(internal_rate)
-    hours = Decimal.new(hours)
+    bill_rate = Decimal.new(changes.bill_rate)
+    internal_rate = Decimal.new(changes.internal_rate)
+    hours = Decimal.new(changes.hours)
 
     revenue = Decimal.mult(bill_rate, hours)
     internal_cost = Decimal.mult(internal_rate, hours)
@@ -79,34 +74,6 @@ defmodule Track.Time.Log do
       internal_cost: internal_cost,
       opportunity_cost: Decimal.new(0),
       profit: profit
-    })
-  end
-
-  defp put_calculated_fields(
-         %Ecto.Changeset{
-           valid?: true,
-           changes: %{
-             billable: false,
-             bill_rate: bill_rate,
-             hours: hours,
-             internal_rate: internal_rate
-           }
-         } = changeset
-       ) do
-    bill_rate = Decimal.new(bill_rate)
-    internal_rate = Decimal.new(internal_rate)
-    hours = Decimal.new(hours)
-
-    internal_cost = Decimal.mult(internal_rate, hours)
-    lost_revenue = Decimal.mult(bill_rate, hours)
-    opportunity_cost = Decimal.sub(lost_revenue, internal_cost)
-    revenue = Decimal.new(0.0)
-
-    change(changeset, %{
-      revenue: revenue,
-      internal_cost: internal_cost,
-      opportunity_cost: opportunity_cost,
-      profit: Decimal.new(0)
     })
   end
 

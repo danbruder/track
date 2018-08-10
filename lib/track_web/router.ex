@@ -7,6 +7,18 @@ defmodule TrackWeb.Router do
     plug(:fetch_flash)
     plug(:protect_from_forgery)
     plug(:put_secure_browser_headers)
+    plug(TrackWeb.Plugs.CurrentUser)
+    plug(Turbolinks)
+  end
+
+  pipeline :private_browser do
+    plug(:accepts, ["html"])
+    plug(:fetch_session)
+    plug(:fetch_flash)
+    plug(:protect_from_forgery)
+    plug(:put_secure_browser_headers)
+    plug(TrackWeb.Plugs.CurrentUser)
+    plug(TrackWeb.Plugs.Auth)
     plug(Turbolinks)
   end
 
@@ -18,16 +30,20 @@ defmodule TrackWeb.Router do
     # Use the default browser stack
     pipe_through(:browser)
 
-    get("/", PageController, :index)
-
-    get("/user", UserController, :index)
     get("/user/login", SessionController, :new)
     post("/user/login", SessionController, :create)
     get("/user/register", RegistrationController, :new)
     post("/user/register", RegistrationController, :create)
+    post("/user/logout", SessionController, :delete)
+  end
+
+  scope "/", TrackWeb do
+    # Use the default browser stack
+    pipe_through(:private_browser)
+
+    get("/", PageController, :index)
 
     get("/timesheet", TimesheetController, :index)
-
     get("/entry/new", LogController, :new)
     post("/entry/new", LogController, :create)
     get("/projects", ProjectController, :index)

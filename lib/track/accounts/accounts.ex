@@ -10,9 +10,19 @@ defmodule Track.Accounts do
 
   def list_users, do: User |> Repo.all()
 
-  def register(args) do
+  @doc """
+  Register an account
+
+  iex> register(email, password, first_name, last_name)
+  """
+  def register(email, password, first_name \\ "", last_name \\ "") do
     %User{}
-    |> User.changeset(args)
+    |> User.changeset(%{
+      first_name: first_name,
+      last_name: last_name,
+      email: email,
+      password: password
+    })
     |> Repo.insert()
   end
 

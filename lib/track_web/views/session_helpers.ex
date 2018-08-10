@@ -1,15 +1,24 @@
 defmodule TrackWeb.SessionHelpers do
+  alias Track.Accounts.User
+
   def current_user(conn) do
     conn
-    |> Plug.Conn.get_session(:current_user)
-    |> Track.Accounts.get_user_by_id()
+    |> case do
+      %{assigns: %{current_user: current_user}} ->
+        current_user
+
+      _ ->
+        nil
+    end
   end
 
   def logged_in?(conn) do
     conn
-    |> Plug.Conn.get_session(:current_user)
     |> case do
-      id when is_number(id) ->
+      %{assigns: %{current_user: nil}} ->
+        false
+
+      %{assigns: %{current_user: %User{} = user}} ->
         true
 
       _ ->

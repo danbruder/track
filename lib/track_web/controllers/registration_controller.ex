@@ -6,13 +6,12 @@ defmodule TrackWeb.RegistrationController do
     render(conn, "new.html", changeset: Accounts.registration_change())
   end
 
-  def create(conn, params) do
-    params
-    |> Accounts.register()
+  def create(conn, %{"email" => email, "password" => password} = args) do
+    Accounts.register(email, password, args.first_name, args.last_name)
     |> case do
       {:ok, user} ->
         conn
-        |> put_session(:current_user, user.id)
+        |> put_session(:user_id, user.id)
         |> put_flash(:info, "Registered!")
         |> redirect(to: "/user")
 

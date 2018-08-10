@@ -13,13 +13,11 @@ defmodule TrackWeb.SessionController do
     |> case do
       {:ok, user} ->
         conn
-        |> put_session(:current_user, user.id)
+        |> put_session(:user_id, user.id)
         |> put_flash(:info, "Logged in")
-        |> redirect(to: "/user")
+        |> redirect(to: "/")
 
       {:error, reason} ->
-        IO.puts(reason)
-
         conn
         |> put_flash(:info, "Wrong email or password")
         |> render("new.html")
@@ -30,5 +28,12 @@ defmodule TrackWeb.SessionController do
     conn
     |> put_flash(:info, "Please enter email and password")
     |> render("new.html")
+  end
+
+  def delete(conn, _params) do
+    conn
+    |> clear_session
+    |> put_flash(:info, "Successfully logged out")
+    |> redirect(to: "/user/login")
   end
 end

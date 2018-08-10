@@ -7,10 +7,12 @@ html lang="en"
     meta content="width=device-width, initial-scale=1" name="viewport" /
     meta content="" name="description" /
     meta content="" name="author" /
+    meta name="csrf-token" content="#{get_csrf_token()}"
+    meta name="csrf-param" content="_csrf_token"
     title Hello Track!
     link href="#{static_path(@conn, "/css/app.css")}" rel="stylesheet" /
     link href="https://fonts.googleapis.com/css?family=IBM+Plex+Sans:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet" /
-    script src="#{static_path(@conn, "/js/app.js")}" 
+    script data-turbolinks-track="reload" src="#{static_path(@conn, "/js/app.js")}"
   body
     div
       header.bb.b--black-10
@@ -21,14 +23,15 @@ html lang="en"
               = if logged_in?(@conn) do
                 - user = current_user(@conn)
                 span.ttu = user.first_name
-                a.pl3.dib.link.black href="/user/logout" Logout
+                = link( "Logout", to: session_path(@conn, :delete), class: " pl3 dib link black", data: [method: :post, remote: true] )
               - else 
                 span 
                   a.black.link href="/user/login" Log in
 
       main.mw9.center.pa3.pa5-ns.pt3-ns.flex role="main"
-        .sidebar.mw5.w-100.pv3
-          = render "_sidebar_nav.html", assigns
+        = if logged_in?(@conn) do
+          .sidebar.mw5.w-100.pv3
+            = render "_sidebar_nav.html", assigns
         .content.w-100
           p.alert.alert-info role="alert" = get_flash(@conn, :info)
           p.alert.alert-danger role="alert" = get_flash(@conn, :error)

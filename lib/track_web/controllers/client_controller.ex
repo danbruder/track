@@ -3,10 +3,10 @@ defmodule TrackWeb.ClientController do
   import TrackWeb.SessionHelpers, only: [current_user: 1]
   alias Track.Accounts
   alias Track.Time
+  alias TrackWeb.Helpers
 
   def index(conn, _params) do
     clients = Time.list_clients()
-
     render(conn, "index.html", clients: clients)
   end
 
