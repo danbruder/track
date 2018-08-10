@@ -17,10 +17,6 @@ defmodule TrackWeb.TimesheetView do
     end)
   end
 
-  def user_logs_by_date() do
-    Time.list_logs()
-  end
-
   def format_date(date) do
     case date do
       %Date{day: day, month: month, year: year} ->

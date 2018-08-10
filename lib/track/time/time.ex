@@ -277,7 +277,8 @@ defmodule Track.Time do
   def list_logs_for_user_and_date(user, date) do
     from(
       l in Log,
-      where: l.user_id == ^user.id
+      where: l.user_id == ^user.id and l.date == ^date,
+      limit: 1
     )
     |> Repo.all()
   end
