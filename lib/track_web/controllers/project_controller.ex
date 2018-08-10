@@ -3,6 +3,8 @@ defmodule TrackWeb.ProjectController do
   import TrackWeb.SessionHelpers, only: [current_user: 1]
   alias Track.Accounts
   alias Track.Time
+  alias TrackWeb.Router.Helpers, as: Routes
+  alias TrackWeb.Endpoint
 
   def index(conn, _params) do
     projects = Time.list_projects()
@@ -22,12 +24,12 @@ defmodule TrackWeb.ProjectController do
 
         conn
         |> put_flash(:info, "Project Saved")
-        |> render("index.html", changeset: changeset)
+        |> redirect(to: Routes.project_path(Endpoint, :index))
 
       {:error, changeset} ->
         conn
         |> put_flash(:error, "Error saving project")
-        |> render("index.html", changeset: changeset)
+        |> render("new.html", changeset: changeset)
     end
   end
 end
