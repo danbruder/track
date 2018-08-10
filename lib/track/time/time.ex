@@ -6,6 +6,7 @@ defmodule Track.Time do
   import Ecto.Query, warn: false
   alias Track.Repo
 
+  alias Track.Time.Project
   alias Track.Time.Client
 
   @doc """
@@ -114,7 +115,29 @@ defmodule Track.Time do
     end
   end
 
-  alias Track.Time.Project
+  def client_by_id(id) do
+    Client
+    |> Repo.get_by(id: id)
+    |> case do
+      nil ->
+        {:error, :not_found}
+
+      client ->
+        {:ok, client}
+    end
+  end
+
+  def client_by_project_id(id) do
+    from(p in Project, where: p.id == ^id, select: p.client_id)
+    |> Repo.one()
+    |> case do
+      id when is_number(id) ->
+        client_by_id(id)
+
+      nil ->
+        {:error, :not_found}
+    end
+  end
 
   @doc """
   Returns the list of projects.
@@ -219,6 +242,18 @@ defmodule Track.Time do
 
       _ ->
         false
+    end
+  end
+
+  def project_by_id(id) do
+    Project
+    |> Repo.get_by(id: id)
+    |> case do
+      nil ->
+        {:error, :not_found}
+
+      project ->
+        {:ok, project}
     end
   end
 

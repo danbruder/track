@@ -9,6 +9,23 @@
             small.db.gray.ttu Name
           = text_input f, :name, class: text_field_classes <> " pl0", placeholder: "Acme Corp"
           = error_tag f, :name
+    .flex
+      .pa3
+        small.pb1.db.gray.ttu Billable
+        .pretty.p-smooth.p-icon.p-round
+          = checkbox f, :billable, default: true
+          .state.p-success
+            i.icon data-feather="check-circle"
+            label.gray.f5 Project is billable
+        = error_tag f, :billable
+      .pa3.mw4.w-100.pr1
+        small.pb1.db.gray.ttu Bill Rate
+        = text_input f, :bill_rate, class: text_field_classes, placeholder: "0.00"
+        = error_tag f, :bill_rate
+      .pa3.mw4.w-100.pr1
+        small.pb1.db.gray.ttu Internal Rate
+        = text_input f, :internal_rate, class: text_field_classes, placeholder: "0.00"
+        = error_tag f, :internal_rate
     div.bt.b--black-10
       .pa3
         input.ba.bg-white.pa3.pv2.br1.grow.pointer type="submit" value="Save"

@@ -4,6 +4,8 @@ defmodule TrackWeb.ClientController do
   alias Track.Accounts
   alias Track.Time
   alias TrackWeb.Helpers
+  alias TrackWeb.Endpoint
+  alias TrackWeb.Router.Helpers, as: Routes
 
   def index(conn, _params) do
     clients = Time.list_clients()
@@ -22,7 +24,7 @@ defmodule TrackWeb.ClientController do
 
         conn
         |> put_flash(:info, "Client Saved")
-        |> render("new.html", changeset: changeset)
+        |> redirect(to: Routes.client_path(Endpoint, :index))
 
       {:error, changeset} ->
         conn

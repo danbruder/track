@@ -8,18 +8,17 @@ defmodule TrackWeb.SessionController do
 
   def create(conn, %{"email" => email, "password" => password}) do
     email
-    |> String.downcase()
     |> Track.Accounts.login_by_email(password)
     |> case do
       {:ok, user} ->
         conn
         |> put_session(:user_id, user.id)
-        |> put_flash(:info, "Logged in")
+        |> put_flash(:success, "Logged in")
         |> redirect(to: "/")
 
       {:error, reason} ->
         conn
-        |> put_flash(:info, "Wrong email or password")
+        |> put_flash(:error, reason)
         |> render("new.html")
     end
   end

@@ -4,14 +4,13 @@ defmodule Track.Time.Log do
 
   schema "logs" do
     # Raw data
-
-    field(:bill_rate, :decimal)
-    field(:billable, :boolean, default: false)
-    field(:billed, :boolean, default: false)
-    field(:date, :date)
     field(:description, :string)
     field(:hours, :decimal)
+    field(:date, :date)
+    field(:bill_rate, :decimal)
     field(:internal_rate, :decimal)
+    field(:billable, :boolean, default: true)
+    field(:billed, :boolean, default: false)
 
     # Computed fields
     field(:revenue, :decimal)
@@ -42,9 +41,54 @@ defmodule Track.Time.Log do
       :description,
       :hours,
       :date,
-      :user_id
+      :user_id,
+      :project_id
     ])
+    |> inherit_bill_rates
     |> put_calculated_fields
+  end
+
+  defp inherit_bill_rates(
+         %Ecto.Changeset{
+           valid?: true,
+           changes: %{project_id: project_id}
+         } = changeset
+       ) do
+    case Time.project_by_id(project_id) do
+      {:ok, project} ->
+        if project.override_rates do
+          change(
+            changeset,
+            %{
+              bill_rate: project.bill_rate,
+              internal_rate: project.internal_rate,
+              billable: project.billable
+            }
+          )
+        else
+          case Time.client_by_project_id(project_id) do
+            {:ok, client} ->
+              change(
+                changeset,
+                %{
+                  bill_rate: client.bill_rate,
+                  internal_rate: client.internal_rate,
+                  billable: client.billable
+                }
+              )
+
+            {:error, error} ->
+              add_error(
+                changeset,
+                :project_id,
+                "Could not find client for project. Please set bill rates on project or client"
+              )
+          end
+        end
+
+      {:error, error} ->
+        add_error(changeset, :project_id, "Could not find project")
+    end
   end
 
   defp put_calculated_fields(
