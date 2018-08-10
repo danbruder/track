@@ -1,24 +1,29 @@
 defmodule TrackWeb.RegistrationController do
   use TrackWeb, :controller
   alias Track.Accounts
+  alias TrackWeb.Router.Helpers, as: Routes
+  alias TrackWeb.Endpoint
 
   def new(conn, _params) do
     render(conn, "new.html", changeset: Accounts.registration_change())
   end
 
-  def create(conn, %{"email" => email, "password" => password} = args) do
-    Accounts.register(email, password, args.first_name, args.last_name)
+  def create(
+        conn,
+        %{"user" => user} = args
+      ) do
+    Accounts.register(user)
     |> case do
       {:ok, user} ->
         conn
         |> put_session(:user_id, user.id)
         |> put_flash(:info, "Registered!")
-        |> redirect(to: "/user")
+        |> redirect(to: Routes.page_path(Endpoint, :index))
 
-      {:error, reason} ->
+      {:error, changeset} ->
         conn
         |> put_flash(:error, "Something went wrong...")
-        |> render("new.html")
+        |> render("new.html", changeset: changeset)
     end
   end
 

@@ -44,8 +44,8 @@ defmodule TrackWeb.Router do
     get("/", PageController, :index)
 
     get("/timesheet", TimesheetController, :index)
-    get("/entry/new", LogController, :new)
-    post("/entry/new", LogController, :create)
+    get("/log/new", LogController, :new)
+    post("/log/new", LogController, :create)
     get("/projects", ProjectController, :index)
     get("/projects/new", ProjectController, :new)
     post("/projects/new", ProjectController, :create)

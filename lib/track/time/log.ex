@@ -32,24 +32,16 @@ defmodule Track.Time.Log do
     |> cast(attrs, [
       :description,
       :hours,
-      :billable,
-      :bill_rate,
-      :internal_rate,
       :billed,
       :project_id,
-      :client_id,
-      :user_id
+      :user_id,
+      :project_id
     ])
     |> cast_date(attrs)
     |> validate_required([
       :description,
       :hours,
       :date,
-      :billable,
-      :bill_rate,
-      :internal_rate,
-      :billed,
-      :project_id,
       :user_id
     ])
     |> put_calculated_fields

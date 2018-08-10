@@ -10,19 +10,9 @@ defmodule Track.Accounts do
 
   def list_users, do: User |> Repo.all()
 
-  @doc """
-  Register an account
-
-  iex> register(email, password, first_name, last_name)
-  """
-  def register(email, password, first_name \\ "", last_name \\ "") do
+  def register(user) do
     %User{}
-    |> User.changeset(%{
-      first_name: first_name,
-      last_name: last_name,
-      email: email,
-      password: password
-    })
+    |> User.changeset(user)
     |> Repo.insert()
   end
 
@@ -35,7 +25,6 @@ defmodule Track.Accounts do
         {:error, reason}
 
       error ->
-        IO.inspect(error)
         {:error, "Could not log in. Check your email or password and try again."}
     end
   end

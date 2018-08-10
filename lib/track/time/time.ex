@@ -102,6 +102,18 @@ defmodule Track.Time do
     Client.changeset(client, %{})
   end
 
+  def clients_exist?() do
+    from(p in Client, select: count(p.id))
+    |> Repo.one()
+    |> case do
+      i when i > 0 ->
+        true
+
+      _ ->
+        false
+    end
+  end
+
   alias Track.Time.Project
 
   @doc """
@@ -196,6 +208,18 @@ defmodule Track.Time do
   """
   def change_project(%Project{} = project \\ %Project{}) do
     Project.changeset(project, %{})
+  end
+
+  def projects_exist?() do
+    from(p in Project, select: count(p.id))
+    |> Repo.one()
+    |> case do
+      i when i > 0 ->
+        true
+
+      _ ->
+        false
+    end
   end
 
   alias Track.Time.Log

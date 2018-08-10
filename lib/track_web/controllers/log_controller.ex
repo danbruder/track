@@ -4,8 +4,17 @@ defmodule TrackWeb.LogController do
   alias Track.Accounts
   alias Track.Time
 
+  # plug(
+  # TrackWeb.Plugs.ClientsExist,
+  # "Before you create a log, lets set up clients and projects" when action in [:new, :create]
+  # )
+
+  # plug(TrackWeb.Plugs.ProjectsExist, "Create a project first" when action in [:new, :create])
+
   def new(conn, params) do
+    # check to see if there is a client and project first
     changeset = Time.change_log()
+
     render(conn, "index.html", changeset: changeset)
   end
 
@@ -15,13 +24,21 @@ defmodule TrackWeb.LogController do
         changeset = Time.change_log()
 
         conn
-        |> put_flash(:info, "Entry Saved")
+        |> put_flash(:info, "Log Saved")
         |> render("index.html", changeset: changeset)
 
       {:error, changeset} ->
         conn
-        |> put_flash(:error, "Error saving entry")
+        |> put_flash(:error, "Error saving Log")
         |> render("index.html", changeset: changeset)
     end
+  end
+
+  def create_project_first(conn, params) do
+    render(conn, "create_project_first.html")
+  end
+
+  def create_client_first(conn, params) do
+    render(conn, "create_client_first.html")
   end
 end

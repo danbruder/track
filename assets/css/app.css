@@ -14,3 +14,19 @@ body {
 .bg-purple {
   background: linear-gradient(rgb(74, 62, 86), rgb(48, 40, 57));
 }
+
+.bg--red-10 {
+  background-color: #fbc9c4;
+}
+
+.b-red {
+  border-color: rgb(224, 62, 47);
+}
+
+.bg--yellow-10 {
+  background-color: #fdf2c5;
+}
+
+.b-yellow {
+  border-color: #F4D03F;
+}
