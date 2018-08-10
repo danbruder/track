@@ -1,6 +1,7 @@
 defmodule Track.Time.Log do
   use Ecto.Schema
   import Ecto.Changeset
+  alias Track.Time
 
   schema "logs" do
     # Raw data
@@ -33,8 +34,7 @@ defmodule Track.Time.Log do
       :hours,
       :billed,
       :project_id,
-      :user_id,
-      :project_id
+      :user_id
     ])
     |> cast_date(attrs)
     |> validate_required([
@@ -90,6 +90,8 @@ defmodule Track.Time.Log do
         add_error(changeset, :project_id, "Could not find project")
     end
   end
+
+  defp inherit_bill_rates(changeset), do: changeset
 
   defp put_calculated_fields(
          %Ecto.Changeset{

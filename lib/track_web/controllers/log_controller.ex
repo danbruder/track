@@ -4,13 +4,6 @@ defmodule TrackWeb.LogController do
   alias Track.Accounts
   alias Track.Time
 
-  # plug(
-  # TrackWeb.Plugs.ClientsExist,
-  # "Before you create a log, lets set up clients and projects" when action in [:new, :create]
-  # )
-
-  # plug(TrackWeb.Plugs.ProjectsExist, "Create a project first" when action in [:new, :create])
-
   def new(conn, params) do
     # check to see if there is a client and project first
     changeset = Time.change_log()
