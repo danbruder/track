@@ -1,9 +1,14 @@
-h1 Projects
+.pb4
+  h1 Projects
+  = link("New Project",to: project_path(@conn, :new), class: "link pa3 pv2 ba b--blue blue grow ttu br2 f7")
 
-= link("New Project", to: project_path(@conn, :new))
+div
+  = for client <- @clients do
+    h3 = client.name
+    = for project <- client.projects do
+      .mb3.w-100.pa3.pv3.br1.ba.b--black-10.flex.items-center.justify-between style="border-bottom: 1px solid rgb(226, 219, 232);"
+        div
+          p.mv1.pa0 = project.name
 
-ul
-  = for project <- @projects do
-    li = project.name
 
 

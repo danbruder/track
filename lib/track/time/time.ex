@@ -19,7 +19,9 @@ defmodule Track.Time do
 
   """
   def list_clients do
-    Repo.all(Client)
+    Client
+    |> preload(:projects)
+    |> Repo.all()
   end
 
   @doc """
@@ -149,7 +151,9 @@ defmodule Track.Time do
 
   """
   def list_projects do
-    Repo.all(Project)
+    Project
+    |> preload(:client)
+    |> Repo.all()
   end
 
   @doc """

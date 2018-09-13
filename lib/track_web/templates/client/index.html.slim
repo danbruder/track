@@ -1,7 +1,12 @@
-h1 Clients
+.pb4
+  h1 Clients
+  = link("New Client",to: client_path(@conn, :new), class: "link pa3 pv2 ba b--blue blue grow  ttu br2 f7")
 
-a href="#{client_path(@conn, :new)}" New Client
-
-ul
+div
   = for client <- @clients do
-    li = client.name
+    .mb3.w-100.pa3.pv3.br1.ba.b--black-10.flex.items-center.justify-between style="border-bottom: 1px solid rgb(226, 219, 232);"
+      div
+        p.mv1.pa0 = client.name
+
+
+

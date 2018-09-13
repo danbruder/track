@@ -7,9 +7,9 @@ defmodule TrackWeb.ProjectController do
   alias TrackWeb.Endpoint
 
   def index(conn, _params) do
-    projects = Time.list_projects()
+    clients_with_projects = Time.list_clients()
 
-    render(conn, "index.html", projects: projects)
+    render(conn, "index.html", clients: clients_with_projects)
   end
 
   def new(conn, params) do

@@ -1,22 +1,20 @@
 
 div.w-100
-  .pb3.flex.justify-between.items-center
-    h1.w-50 Timesheet
-    = link("New log",to: log_path(@conn, :new), class: "link pa4 pv3 bg-blue white b ttu br2")
-  div
-    .flex.justify-between
-      .w-33.pa3
-        = link("l", to: timesheet_path(@conn, :index, date: @yesterday))
-      .w-33.pa3
-        = link("l", to: timesheet_path(@conn, :index, date: @yesterday))
-      .w-33.pa3
-        = link("l", to: timesheet_path(@conn, :index, date: @tomorrow))
-    = for log <- @logs do
-      .mb3.w-100.pa3.pv3.br1.ba.b--black-10.flex.items-center.justify-between style="border-bottom: 1px solid rgb(226, 219, 232);"
-        div
-          label.ttu.tracked.gray.ma0.pa0 = log.project.name
-          h4.mv1.pa0 = log.description
-          small = format_date(log.date)
+  .pb4
+    h1 Timesheet
+    = link("New log",to: log_path(@conn, :new), class: "link pa3 pv2 ba b--blue blue grow ttu br2 f7")
+  .mw7
+    .flex.justify-center.pa3.f7
+      div yesterday 
+      .ph2 today
+      div tomorrow
+    .br.bt.bl.b--black-10.br1
+      = for log <- @logs do
+        .w-100.pa3.pv3.flex.items-center.justify-between style="border-bottom: 1px solid rgb(226, 219, 232);"
+          div
+            label.ttu.tracked.gray.ma0.pa0.f7 = log.project.name
+            p.mv1.pa0 = log.description
+            small = format_date(log.date)
 
-        div
-          .f3.fw3  = "#{log.hours} hrs"
+          div
+            .f3.fw3  = "#{log.hours} hrs"

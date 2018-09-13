@@ -8,16 +8,16 @@ defmodule Track.Time.Log do
     field(:description, :string)
     field(:hours, :decimal)
     field(:date, :date)
-    field(:bill_rate, :decimal)
-    field(:internal_rate, :decimal)
-    field(:billable, :boolean, default: true)
+    # field(:bill_rate, :decimal)
+    # field(:internal_rate, :decimal)
+    # field(:billable, :boolean, default: true)
     field(:billed, :boolean, default: false)
 
     # Computed fields
-    field(:revenue, :decimal)
-    field(:internal_cost, :decimal)
-    field(:opportunity_cost, :decimal)
-    field(:profit, :decimal)
+    # field(:revenue, :decimal)
+    # field(:internal_cost, :decimal)
+    # field(:opportunity_cost, :decimal)
+    # field(:profit, :decimal)
 
     belongs_to(:user, Track.Accounts.User)
     belongs_to(:project, Track.Time.Project)
@@ -44,8 +44,9 @@ defmodule Track.Time.Log do
       :user_id,
       :project_id
     ])
-    |> inherit_bill_rates
-    |> put_calculated_fields
+
+    # |> inherit_bill_rates
+    # |> put_calculated_fields
   end
 
   defp inherit_bill_rates(

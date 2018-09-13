@@ -17,7 +17,7 @@ defmodule TrackWeb.LogController do
         changeset = Time.change_log()
 
         conn
-        |> put_flash(:info, "Log Saved")
+        |> put_flash(:success, "Log Saved")
         |> render("index.html", changeset: changeset)
 
       {:error, changeset} ->

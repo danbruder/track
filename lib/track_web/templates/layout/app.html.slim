@@ -29,7 +29,7 @@ html lang="en"
 
     main.mw9.center.pa3.pa5-ns.pt0.pt3-ns.flex.relative role="main"
       = if logged_in?(@conn) do
-        .sidebar.mw5.w-100.pv3.dn.db-ns
+        .sidebar.mw4.mr5.w-100.pv3.dn.db-ns
           = render "_sidebar_nav.html", assigns
       .content.w-100
         = if info = get_flash(@conn, :info) do
