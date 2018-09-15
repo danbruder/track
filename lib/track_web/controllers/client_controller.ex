@@ -17,6 +17,14 @@ defmodule TrackWeb.ClientController do
     render(conn, "new.html", changeset: changeset)
   end
 
+  @doc """
+  Show a client
+  """
+  def show(conn, %{"id" => id}) do
+    client = Time.get_client_with_projects!(id)
+    render(conn, "show.html", client: client)
+  end
+
   def create(conn, %{"client" => client} = params) do
     case Time.create_client(client) do
       {:ok, client} ->

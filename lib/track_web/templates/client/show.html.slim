@@ -1,0 +1,6 @@
+.pb4
+  h1 = @client.name
+  ul
+    = for project <- @client.projects do
+      li = project.name
+

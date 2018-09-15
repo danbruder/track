@@ -41,6 +41,26 @@ defmodule Track.Time do
   def get_client!(id), do: Repo.get!(Client, id)
 
   @doc """
+  Gets a single client with projects
+
+  Raises `Ecto.NoResultsError` if the Client does not exist.
+
+  ## Examples
+
+      iex> get_client_with_projects!(123)
+      %Client{}
+
+      iex> get_client_with_projects!(456)
+      ** (Ecto.NoResultsError)
+
+  """
+  def get_client_with_projects!(id),
+    do:
+      Client
+      |> preload(:projects)
+      |> Repo.get!(id)
+
+  @doc """
   Creates a client.
 
   ## Examples
@@ -284,6 +304,7 @@ defmodule Track.Time do
       where: l.user_id == ^user.id and l.date == ^date,
       limit: 1
     )
+    |> preload(:project)
     |> Repo.all()
   end
 

@@ -42,16 +42,22 @@ defmodule TrackWeb.Router do
     pipe_through(:private_browser)
 
     get("/", PageController, :index)
-
     get("/timesheet", TimesheetController, :index)
+
+    # Logs
     get("/log/new", LogController, :new)
     post("/log/new", LogController, :create)
+
+    # Projects
     get("/projects", ProjectController, :index)
     get("/projects/new", ProjectController, :new)
     post("/projects/new", ProjectController, :create)
+
+    # Clients
     get("/clients", ClientController, :index)
     get("/clients/new", ClientController, :new)
     post("/clients/new", ClientController, :create)
+    get("/clients/:id", ClientController, :show)
   end
 
   # Other scopes may use custom stacks.

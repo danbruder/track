@@ -3,11 +3,14 @@ div.w-100
   .pb4
     h1 Timesheet
     = link("New log",to: log_path(@conn, :new), class: "link pa3 pv2 ba b--blue blue grow ttu br2 f7")
-  .mw7
-    .flex.justify-center.pa3.f7
-      div yesterday 
-      .ph2 today
-      div tomorrow
+  div
+    .flex.f7.bt.br.bl.b--black-10.justify-around
+      = for {formatted_date, day} <- @weekdays do
+        .b--black-10.pa3.pointer
+          = link(to: timesheet_path(@conn, :index, date: formatted_date)) do
+            div = day
+            div = formatted_date
+
     .br.bt.bl.b--black-10.br1
       = for log <- @logs do
         .w-100.pa3.pv3.flex.items-center.justify-between style="border-bottom: 1px solid rgb(226, 219, 232);"
