@@ -16,14 +16,4 @@ defmodule TrackWeb.TimesheetView do
       {p.name, p.id}
     end)
   end
-
-  def format_date(date) do
-    case date do
-      %Date{day: day, month: month, year: year} ->
-        "#{month}/#{day}/#{year}"
-
-      date ->
-        date
-    end
-  end
 end

@@ -1,15 +1,26 @@
+- [last_week, this_week, next_week] = @week_links
 
 div.w-100
   .pb4
     h1 Timesheet
     = link("New log",to: log_path(@conn, :new), class: "link pa3 pv2 ba b--blue blue grow ttu br2 f7")
   div
+    .flex.f7.bt.br.bl.b--black-10.justify-between.pa3.i
+      div 
+        span.pr1 < 
+        span = last_week |> Track.Time.Helpers.date_to_human_format
+      div 
+        span.pr1 Week of
+        span = this_week |> Track.Time.Helpers.date_to_human_format
+      div 
+        span.pr1 >
+        span = next_week |> Track.Time.Helpers.date_to_human_format
     .flex.f7.bt.br.bl.b--black-10.justify-around
-      = for {formatted_date, day} <- @weekdays do
+      = for date <- @dates do
         .b--black-10.pa3.pointer
-          = link(to: timesheet_path(@conn, :index, date: formatted_date)) do
-            div = day
-            div = formatted_date
+          = link(to: timesheet_path(@conn, :index, date: Track.Time.Helpers.date_to_machine_format(date))) do
+            div = date |> Track.Time.Helpers.date_to_human_format()
+            div = date |> Track.Time.Helpers.date_to_day_of_week()
 
     .br.bt.bl.b--black-10.br1
       = for log <- @logs do
@@ -17,7 +28,7 @@ div.w-100
           div
             label.ttu.tracked.gray.ma0.pa0.f7 = log.project.name
             p.mv1.pa0 = log.description
-            small = format_date(log.date)
+            small = log.date |> Track.Time.Helpers.date_to_human_format
 
           div
             .f3.fw3  = "#{log.hours} hrs"
