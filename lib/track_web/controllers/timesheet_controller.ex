@@ -40,7 +40,7 @@ defmodule TrackWeb.TimesheetController do
       |> Time.list_logs_for_user_and_date(date)
 
     conn
-    |> render("index.html", logs: logs, dates: dates, week_links: week_links)
+    |> render("index.html", logs: logs, dates: dates, date: date, week_links: week_links)
   end
 
   defp index_without_logs(conn) do
@@ -51,6 +51,6 @@ defmodule TrackWeb.TimesheetController do
     week_links = Time.Helpers.first_date_of_week_from_date_with_prev_and_next(Timex.today())
 
     conn
-    |> render("index.html", logs: [], dates: dates, week_links: week_links)
+    |> render("index.html", logs: [], dates: dates, date: Timex.today(), week_links: week_links)
   end
 end
