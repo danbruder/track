@@ -27,11 +27,11 @@ defmodule Track.Time.Helpers do
     previous = Timex.shift(first_date, weeks: -1)
     next = Timex.shift(first_date, weeks: 1)
 
-    [
-      previous,
-      first_date,
-      next
-    ]
+    %{
+      previous: previous,
+      current: first_date,
+      next: next
+    }
   end
 
   def date_to_human_format(date) do

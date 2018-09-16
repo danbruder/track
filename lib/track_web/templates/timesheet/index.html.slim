@@ -1,4 +1,4 @@
-- [last_week, this_week, next_week] = @week_links
+- %{previous: last_week, current: current_week, next: next_week} = @week_links
 
 div.w-100
   .pb4
@@ -6,13 +6,13 @@ div.w-100
     = link("New log",to: log_path(@conn, :new), class: "link pa3 pv2 ba b--blue blue grow ttu br2 f7")
   div
     .flex.f7.bt.br.bl.b--black-10.justify-between.pa3.i
-      div 
+      = link(to: timesheet_path(@conn, :index, date: Track.Time.Helpers.date_to_machine_format(last_week))) do
         span.pr1 < 
         span = last_week |> Track.Time.Helpers.date_to_human_format
       div 
         span.pr1 Week of
-        span = this_week |> Track.Time.Helpers.date_to_human_format
-      div 
+        span = current_week |> Track.Time.Helpers.date_to_human_format
+      = link(to: timesheet_path(@conn, :index, date: Track.Time.Helpers.date_to_machine_format(next_week))) do
         span.pr1 >
         span = next_week |> Track.Time.Helpers.date_to_human_format
     .flex.f7.bt.br.bl.b--black-10.justify-around

@@ -32,8 +32,7 @@ defmodule TrackWeb.TimesheetController do
       date
       |> Time.Helpers.dates_this_week_from_date()
 
-    week_links = Time.Helpers.first_date_of_week_from_date(date)
-    IO.inspect(week_links)
+    week_links = Time.Helpers.first_date_of_week_from_date_with_prev_and_next(date)
 
     logs =
       conn
@@ -49,7 +48,7 @@ defmodule TrackWeb.TimesheetController do
       Timex.today()
       |> Time.Helpers.dates_this_week_from_date()
 
-    week_links = Time.Helpers.first_date_of_week_from_date(Timex.today())
+    week_links = Time.Helpers.first_date_of_week_from_date_with_prev_and_next(Timex.today())
 
     conn
     |> render("index.html", logs: [], dates: dates, week_links: week_links)
