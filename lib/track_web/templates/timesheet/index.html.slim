@@ -3,7 +3,7 @@
 div.w-100
   .pb4
     h1 Timesheet
-    = link("New log",to: log_path(@conn, :new), class: "link pa3 pv2 ba b--blue blue grow ttu br2 f7")
+    = link("New log",to: log_path(@conn, :new, date: Track.Time.Helpers.date_to_machine_format(date)), class: "link pa3 pv2 ba b--blue blue grow ttu br2 f7")
   div
     .flex.f7.bt.br.bl.b--black-10.justify-between.pa3.i
       div
