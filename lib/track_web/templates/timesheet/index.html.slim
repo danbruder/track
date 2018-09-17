@@ -17,8 +17,8 @@ div.w-100
 
       div
         = link(to: timesheet_path(@conn, :index, date: Track.Time.Helpers.date_to_machine_format(next_week)), class: "link") do
-          span.pr1 >
           span = next_week |> Track.Time.Helpers.date_to_human_format
+          span.pl1 >
 
     .flex.f7.bt.br.bl.b--black-10.justify-around
       = for date <- @dates do

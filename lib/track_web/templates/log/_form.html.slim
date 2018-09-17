@@ -20,7 +20,7 @@
           .flex.items-center
             i.mw1.gray.pr1 data-feather="calendar"
             small.db.gray.ttu Date
-          = text_input f, :date, class: text_field_classes, placeholder: "Date"
+          = text_input f, :date, class: text_field_classes, placeholder: "Date", value: @date
           = error_tag f, :date
         .mw5.w-100.pr3
           .flex.items-center

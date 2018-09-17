@@ -5,10 +5,18 @@ defmodule TrackWeb.LogController do
   alias Track.Time
 
   def new(conn, params) do
-    # check to see if there is a client and project first
     changeset = Time.change_log()
 
-    render(conn, "index.html", changeset: changeset)
+    date =
+      case params do
+        %{"date" => date} ->
+          date
+
+        _ ->
+          Timex.today()
+      end
+
+    render(conn, "index.html", changeset: changeset, date: date)
   end
 
   def create(conn, %{"log" => log} = params) do
