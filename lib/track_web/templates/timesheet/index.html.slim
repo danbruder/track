@@ -32,7 +32,8 @@ div.w-100
         .w-100.pa3.pv3.flex.items-center.justify-between style="border-bottom: 1px solid rgb(226, 219, 232);"
           div
             label.ttu.tracked.gray.ma0.pa0.f7 = log.project.name
-            p.mv1.pa0 = log.description
+            p.mv1.pa0 
+              = link(log.description, to: log_path(@conn, :show, log.id), class: "link")
             small = log.date |> Track.Time.Helpers.date_to_human_format
 
           div
