@@ -1,1 +1,15 @@
 h2 = @log.description
+
+div
+  = link("Edit",to: log_path(@conn, :edit, @log.id), class: "link pa3 pv2 ba b--blue blue grow ttu br2 f7")
+
+.br.bt.bl.b--black-10.br1
+  .w-100.pa3.pv3.flex.items-center.justify-between style="border-bottom: 1px solid rgb(226, 219, 232);"
+    div
+      label.ttu.tracked.gray.ma0.pa0.f7 = @log.project.name
+      p.mv1.pa0 
+        = link(@log.description, to: log_path(@conn, :show, @log.id), class: "link")
+      small = @log.date |> Track.Time.Helpers.date_to_human_format
+
+    div
+      .f3.fw3  = "#{@log.hours} hrs"

@@ -1,0 +1,4 @@
+h2 = "Edit \"#{@log.description}\""
+
+div
+  = render("_form.html", log: @log, changeset: @changeset, assigns: assigns, action: log_path(@conn, :update, @log.id))

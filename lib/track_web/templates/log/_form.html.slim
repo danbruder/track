@@ -1,6 +1,6 @@
 - text_field_classes = "input-reset ba br1 b--black-20 pv2 pl2 mb2 db w-100"
 .ba.b--black-10.items-center.br1
-  = form_for @changeset, log_path(@conn, :create), fn f -> 
+  = form_for @changeset, @action, fn f -> 
     .pa3
       .flex.items-center
         .mw7.w-100.pr1
@@ -20,7 +20,11 @@
           .flex.items-center
             i.mw1.gray.pr1 data-feather="calendar"
             small.db.gray.ttu Date
-          = text_input f, :date, class: text_field_classes, placeholder: "Date", value: @date
+          = if Map.get(assigns, :date) do
+            = text_input f, :date, class: text_field_classes, placeholder: "Date", value: @date
+          - else 
+            = text_input f, :date, class: text_field_classes, placeholder: "Date"
+            
           = error_tag f, :date
         .mw5.w-100.pr3
           .flex.items-center

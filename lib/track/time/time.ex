@@ -324,6 +324,9 @@ defmodule Track.Time do
   def get_log!(id), do: Repo.get!(Log, id)
   def get_log(id), do: Repo.get(Log, id)
 
+  def get_log_with_project(id),
+    do: from(l in Log, where: l.id == ^id, preload: [:project]) |> Repo.one()
+
   @doc """
   Creates a log.
 

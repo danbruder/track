@@ -45,8 +45,10 @@ defmodule TrackWeb.Router do
     get("/timesheet", TimesheetController, :index)
 
     # Logs
-    get("/log/:id", LogController, :show)
     get("/log/new", LogController, :new)
+    get("/log/:id", LogController, :show)
+    get("/log/:id/edit", LogController, :edit)
+    put("/log/:id/edit", LogController, :update)
     post("/log/new", LogController, :create)
 
     # Projects
